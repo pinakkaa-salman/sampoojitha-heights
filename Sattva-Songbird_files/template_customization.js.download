@@ -1,0 +1,666 @@
+
+const base_lpa_path = "https://propstory.com/lpa/";
+// const base_lpa_path = "http://localhost/lpa/";
+const element_ids_to_be_removed_before_saving = [
+    "criteo-tags-div",
+    //""
+];
+
+function enableEditableImages() {
+    addEditImageModal();
+    addEditImageModalEvents();
+    addImageChangeBtn();
+    let allImages = $("img").not(".modal-desktop-img, .modal-mobile-img");
+    $.each(allImages, function (index, img) {
+        $(img).parent().hover(function () {
+            $(this).append($(".middle-btn-container"));
+            $(".middle-btn-container").css({ "opacity": "1" });
+            $(img).css({ "opacity": ".7" });
+            $('.change-img-btn').data("img", $(img));
+        }, function () {
+            $(".middle-btn-container").css({ "opacity": "0" });
+            $(img).css({ "opacity": "1" });
+        });
+
+        $('.change-img-btn').on('click', function (e) {
+            $("#imageModal").css({ "display": "block" });
+            let img = $(this).data("img");
+            let mobileUrl = img.attr("mobileurl") !== undefined ? img.attr("mobileurl") : img.attr("src");
+            let desktopUrl = img.attr("desktopurl") !== undefined ? img.attr("desktopurl") : img.attr("src");
+            $(".modal-desktop-img").attr("src", desktopUrl);
+            $(".modal-mobile-img").attr("src", mobileUrl);
+            $(".modal-desktop-img").data("act-img", img);
+            $(".modal-mobile-img").data("act-img", img);
+        });
+    });
+}
+
+function addEditImageModal() {
+    $("body").append('<div id="imageModal" class="image-upload-modal"></div>');
+    $(".image-upload-modal").append('<div class="image-upload-modal-content"></div>');
+    $(".image-upload-modal-content").append('<span id="modalClose" class="image-upload-modal-close">&times;</span>');
+
+    $(".image-upload-modal-content").append('<h4>Desktop Image</h4>');
+    $(".image-upload-modal-content").append('<img class="modal-desktop-img" name="image_preview" style="width: 100%;" id="image_preview">');
+    $(".image-upload-modal-content").append('<form method="post" class="upload-desktop-img-form" enctype="multipart/form-data"></form><br>');
+    $(".upload-desktop-img-form").append('<br><input accept="image" type="file" name="image_file" id="image_file">');
+    $(".upload-desktop-img-form").append('<label name="Quality Control " id="quality-control" class="modalLabel" > Size :</label>');
+    $(".upload-desktop-img-form").append('<span id="image-info" class="modalInfo" style="margin-left:15px;"></span><br>');
+    $(".upload-desktop-img-form").append('<label class="modalLabel">Quality Control :</label>');
+    $(".upload-desktop-img-form").append('<input type="range" min="1" max="10" value="10" name="slider" id="myRange" class="rangeSlider" style="margin-left:10px" >');
+    $(".upload-desktop-img-form").append('<label class="modalLabel" > Max Width :</label>');
+    $(".upload-desktop-img-form").append('<input type="text" name="width" id="image-width" style="width:60px;margin-left:5px;height:25px;" placeholder="Width">');
+    $(".upload-desktop-img-form").append('<label class="modalLabel" > Max Height :</label>');
+    $(".upload-desktop-img-form").append('<input type="text" name="height" id="image-height" style="width:60px;height:25px;margin-left:5px;" placeholder="Height">');
+    $(".upload-desktop-img-form").append('<br><input type="button" name="reset" id="reset" value="reset" class="btn ">');
+    $(".upload-desktop-img-form").append('<input type="submit" name="upload" id="upload" value="Upload" class="btn btn-info">');
+
+    $(".image-upload-modal-content").append('<h4>Mobile Image</h4>');
+    $(".image-upload-modal-content").append('<img class="modal-mobile-img" name="image_preview" style="width: 100%;" id="image_preview_mob">');
+    $(".image-upload-modal-content").append('<form method="post" class="upload-mobile-img-form" enctype="multipart/form-data"></form>');
+    $(".upload-mobile-img-form").append('<br><input accept="image" type="file" name="image_file" id="image_file_mob">');
+    $(".upload-mobile-img-form").append('<label name="Quality Control " id="quality-control" class="modalLabel" > Size :</label>');
+    $(".upload-mobile-img-form").append('<span id="image-info-mob" class="modalInfo" style="margin-left:15px;"></span><br>');
+    $(".upload-mobile-img-form").append('<label class="modalLabel">Quality Control :</label>');
+    $(".upload-mobile-img-form").append('<input type="range" min="1" max="10" value="10" name="slidermob" id="myRangemob" class="rangeSlider" style="margin-left:10px" >');
+    $(".upload-mobile-img-form").append('<label class="modalLabel" > Max Width :</label>');
+    $(".upload-mobile-img-form").append('<input type="text" name="width" id="image-width-mob" style="width:60px;margin-left:5px;height:25px;" placeholder="Width">');
+    $(".upload-mobile-img-form").append('<label class="modalLabel" > Max Height :</label>');
+    $(".upload-mobile-img-form").append('<input type="text" name="height" id="image-height-mob" style="width:60px;height:25px;margin-left:5px;" placeholder="Height">');
+    $(".upload-mobile-img-form").append('<br><input type="button" name="reset" id="reset-mob" value="reset" class="btn ">');
+    $(".upload-mobile-img-form").append('<input type="submit" name="upload" id="upload" value="Upload" class="btn btn-info">');
+
+    $(".image-upload-modal").css({
+        "display": "none",
+        "position": "fixed",
+        "z-index": "10000",
+        "left": "0",
+        "top": "0",
+        "width": "100%",
+        "height": "100%",
+        "overflow": "auto",
+        "background-color": "rgb(0,0,0)",
+        "background-color": "rgba(0,0,0,0.4)"
+    });
+    $(".image-upload-modal-content").css({
+        "background-color": "#fefefe",
+        "margin": "15% auto",
+        "padding": "20px",
+        "border": "1px solid #888",
+        "width": "80%"
+    });
+    $(".image-upload-modal-close").css({
+        "color": "#aaa",
+        "float": "right",
+        "font-size": "28px",
+        "font-weight": "bold",
+        "text-decoration": "none",
+        "cursor": "pointer"
+    });
+    $(".image-upload-modal-close").hover(function () {
+        $(".image-upload-modal-close").css({
+            "color": "black"
+        });
+    }, function () {
+        $(".image-upload-modal-close").css({
+            "color": "#aaa"
+        });
+    });
+    uploadimage()
+
+}
+
+var files = []
+var filesmob = []
+var compressedfile = String
+var compressedfilemob = String
+const uploadimage = function () {
+
+    const slider = document.getElementById('myRange')
+    const slidermob = document.getElementById('myRangemob')
+    const width = document.getElementById('image-width')
+    const widthmob = document.getElementById('image-width-mob')
+    const height = document.getElementById('image-height')
+    const heightmob = document.getElementById('image-height-mob')
+    const reset = document.getElementById('reset')
+    const resetmob = document.getElementById('reset-mob')
+    const preview = document.getElementById('image_preview')
+    const previewmob = document.getElementById('image_preview_mob')
+    const previewfav = document.getElementById('favicon')
+    const imageInfo = document.getElementById('image-info')
+    const imageInfomob = document.getElementById('image-info-mob')
+    let filename = String
+
+    let qualityValue = 1;
+    let qualityValuemob = 1;
+    let maxWidth = 1600;
+    let maxWidthmob = 1600;
+    let maxHeight = 1600;
+    let maxHeightmob = 1600;
+    slider.oninput = function () {
+        qualityValue = this.value / 10
+        if (Boolean(maxWidth) && Boolean(maxHeight)) {
+            compressImage(qualityValue, maxWidth, maxHeight, files, preview, imageInfo,filename)
+        }
+    }
+    slidermob.oninput = function () {
+        qualityValuemob = this.value / 10
+        if (Boolean(maxWidth) && Boolean(maxHeight)) {
+            compressImage(qualityValuemob, maxWidth, maxHeight, filesmob, previewmob, imageInfomob,filename)
+        }
+    }
+    width.oninput = function () {
+        maxWidth = this.value
+        if (Boolean(maxWidth) && Boolean(maxHeight)) {
+            compressImage(qualityValuemob, maxWidth, maxHeight, files, preview, imageInfo,filename)
+        }
+    }
+    widthmob.oninput = function () {
+        maxWidthmob = this.value
+        if (Boolean(maxWidth) && Boolean(maxHeight)) {
+            compressImage(qualityValuemob, maxWidthmob, maxHeightmob, filesmob, previewmob, imageInfomob,filename)
+        }
+    }
+    height.oninput = function () {
+        maxHeight = this.value
+        if (Boolean(maxWidth) && Boolean(maxHeight)) {
+            compressImage(qualityValuemob, maxWidth, maxHeight, files, preview, imageInfo,filename)
+        }
+    }
+    heightmob.oninput = function () {
+        maxHeightmob = this.value
+        if (Boolean(maxWidth) && Boolean(maxHeight)) {
+            compressImage(qualityValuemob, maxWidthmob, maxHeightmob, filesmob, previewmob, imageInfomob,filename)
+        }
+    }
+    reset.addEventListener("click", () => {
+        $(preview).attr("src", URL.createObjectURL(files[0]));
+        width.value = ''
+        height.value = ''
+        slider.value = 10
+        imageInfo.innerHTML = JSON.stringify((files[0].size).toFixed(2) + " KB")
+        compressedfile = URL.createObjectURL(files[0])
+    })
+    resetmob.addEventListener("click", () => {
+        $(previewmob).attr("src", URL.createObjectURL(filesmob[0]));
+        widthmob.value = ''
+        heightmob.value = ''
+        slidermob.value = 10
+        imageInfomob.innerHTML = JSON.stringify((files[0].size).toFixed(2) + " KB")
+        compressedfilemob = URL.createObjectURL(filesmob[0])
+    })
+
+    const upload = document.getElementById('image_file')
+    const uploadFav= document.getElementById('image_favicon')
+    const uploadMob = document.getElementById('image_file_mob')
+
+    upload.addEventListener("change", (evt) => {
+        files = [...evt.target.files]
+        // console.log(files[0])
+        $(preview).attr("src", URL.createObjectURL(files[0]));
+        compressedfile = files[0]
+        filename = files[0].name
+        imageInfo.innerHTML = JSON.stringify((files[0].size).toFixed(2) + " KB")
+        // console.log(filename)
+        // console.log("image_file ",URL.createObjectURL(files[0]))
+    })
+    uploadFav.addEventListener("change", (evt) => {
+        files = [...evt.target.files]
+        // console.log(files[0])
+        $(previewfav).attr("src", URL.createObjectURL(files[0]));
+        compressedfile = files[0]
+        filename = files[0].name
+        // console.log(filename)
+        // console.log("image_file ",URL.createObjectURL(files[0]))
+    })
+    uploadMob.addEventListener("change", (evt) => {
+        filesmob = [...evt.target.files]
+        $(previewmob).attr("src", URL.createObjectURL(filesmob[0]));
+        imageInfomob.innerHTML = JSON.stringify((files[0].size).toFixed(2) + " KB")
+        compressedfile = filesmob[0]
+        filename = filesmob[0].name
+    })
+}
+function compressImage(qualityValue, maxWidth, maxHeight, image, preview, imageInfo,filename) {
+    // let image_file = document.getElementById('image_file')
+    // console.log("image file ",image_file)
+    const options = { targetSize: qualityValue, quality: qualityValue, maxWidth: maxWidth, maxHeight: maxHeight }
+    const compress = new Compress(options)
+    compress.compress(image).then((conversions) => {
+        const { photo, info } = conversions[0]                                                                                                   
+        imageInfo.innerHTML = JSON.stringify((info.endSizeMB * 1000).toFixed(2) + " KB")
+        const objectUrl = URL.createObjectURL(photo.data)
+        Compress.loadImageElement(preview, objectUrl).then(() => {
+            // URL.revokeObjectURL(objectUrl)
+            var reader = new FileReader();
+            reader.readAsDataURL(photo.data); 
+            reader.onloadend = function() {
+                var base64data = reader.result;                
+                // console.log(base64data);
+
+                urltoFile(base64data, filename,'image/jpeg')
+                .then(function(file){ 
+
+            // console.log(file)
+            if (preview.id == 'image_preview')
+                compressedfile = file
+            if (preview.id == 'image_preview_mob')
+                compressedfile = file
+          });  } })
+    })
+
+}
+function urltoFile(url, filename, mimeType){
+    return (fetch(url)
+        .then(function(res){return res.arrayBuffer();})
+        .then(function(buf){return new File([buf], filename,{type:mimeType});})
+    );
+}
+
+//Usage example:
+
+function addImageChangeBtn() {
+    $("body").append('<div class="middle-btn-container" id="imageChangeBtnContainer" style="position: absolute; top: 50%; left: 50%; opacity: 0"><button class="change-img-btn">Change</button></div>');
+}
+
+function addEditImageModalEvents() {
+    $('.upload-desktop-img-form').on('submit', function (e) {
+        e.preventDefault();
+        uploadModalImage(this, function (url) {
+            let img = $(".modal-desktop-img").data("act-img");
+            if (!isMobile()) {
+                img.attr("src",  url);
+            }
+            $(".modal-desktop-img").attr("src",  URL.revokeObjectURL(url));
+            img.attr("desktopurl",  url);
+        }, function (err) {
+            $("#desktop-img-err").text(err);
+        });
+    });
+
+    $('.upload-mobile-img-form').on('submit', function (e) {
+        e.preventDefault();
+        uploadModalImage(this, function (url1) {
+            let img = $(".modal-mobile-img").data("act-img");
+            if (isMobile()) {
+                img.attr("src", url1);
+                console.log(url1 + "dsjflkjfd")
+            }
+            $(".modal-mobile-img").attr("src", url1);
+            img.attr("mobileurl", url1);
+        }, function (err) {
+            $("#mobile-img-err").text(err);
+        });
+    });
+
+    $(".image-upload-modal-close").on('click', function (e) {
+        $("#imageModal").css({ "display": "none" });
+    });
+}
+
+function uploadModalImage(form, successCallback, errorCallback) {
+    let pathname = window.location.pathname;
+    let pathnameElements = pathname.split('/');
+    let templateName = pathnameElements[pathnameElements.length - 2];
+    let formdata = new FormData(form);
+    formdata.append('templateName', templateName);
+    formdata.set("image_file", compressedfile);
+    $.ajax({
+        url: base_lpa_path + "s3upload/",
+        method: "POST",
+        data: formdata,
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function () {
+        },
+        success: function (result) {
+            result = JSON.parse(result);
+            let s3url = result.url
+            s3url = s3url.replace("s3.ap-south-1.amazonaws.com/cdn.propstory.com", "cdn.propstory.com")
+            console.log("image saved " + s3url)
+            console.log("image has been uploaded successfully")
+            if (result.status) {
+                successCallback(s3url);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('error..');
+            console.log(errorThrown);
+            console.log(textStatus);
+        },
+        complete: function () {
+        }
+    });
+}
+
+var url = window.location.href;
+// if(url.indexOf('editable_') == -1) {
+let custom_fields = [
+    { name: 'google_conversion_pixel', label: ' Google Conversion Pixel ID', type: 'pixel' },
+    { name: 'taboola_conversion_pixel', label: 'Taboola Conversion Pixel ID', type: 'pixel' },
+    { name: 'ivr', label: 'IVR Code', type: 'calling' },
+    { name: 'mobile_calling', label: 'Mobile Phone Number', type: 'calling' },
+    { name: 'desktop_calling', label: 'Desktop Phone Number', type: 'calling' },
+    { name: 'webhook_fb', label: 'Webhook For facebook', type: 'webhook' },
+    { name: 'webhook_taboola', label: 'Webhook for taboola', type: 'webhook' },
+    { name: 'webhook_linkedin', label: 'Webhook for linkedin', type: 'webhook' },
+    { name: 'webhook_times', label: 'Webhook for times', type: 'webhook' },
+    { name: 'webhook_google', label: 'Webhook for google', type: 'webhook' },
+    { name: 'title', label: 'Page Title', type: 'title' },
+    { name: 'description', label: 'Page description', type: 'meta' },
+    { name: 'keywords', label: 'Page keywords', type: 'meta' },
+    { name: 'page_name', label: 'Page name', type: 'meta' },
+    { name: 'location', label: 'Location', type: 'location' },
+];
+// }
+
+if (url.indexOf('editable_') == -1) {
+    $('.development_div').hide();
+    $('.intro_heading, .intro_para, .feed-title, .feed-para, .agile-head, .title-text,.desktop, .title , .description, .card-title, .list-group-item-text , .sidenav , .tour-heading ,.tour-para ,.enquire_form ,.navbar-brand, .post-details, .editable, .about_builder, address').prop('contentEditable', 'false');
+    $('body').prop('contentEditable', 'false');
+} else {
+    $('.development_div').show();
+    $('.intro_heading, .intro_para, .feed-title, .feed-para, .agile-head, .title-text,.desktop, .title , .description, .card-title, .list-group-item-text , .sidenav , .tour-heading ,.tour-para ,.enquire_form ,.navbar-brand, .post-details, .editable, .about_builder, address').prop('contentEditable', 'true');
+    $('body').prop('contentEditable', 'true');
+    create_custom_input_fields();
+    create_custom_file_input();
+    enableEditableImages();
+}
+
+function get_var_declaration(field_class, variable_name) {
+    let webhook_url_val = $('.' + field_class).val();
+
+    $('.' + field_class + '_hidden').val(webhook_url_val)
+
+    if (field_class == "location") {
+        // webhook_url_val = encodeURI(webhook_url_val)
+        webhook_url_val = '';
+    }
+    if (webhook_url_val.length > 0) {
+        return "var " + variable_name + " = \"" + webhook_url_val + "\";\n";
+    } else {
+        return "";
+    }
+}
+
+function show_input_values(hidden_field_name, field_name) {
+    let hidden_field_val = $('.' + hidden_field_name).val();
+    $('.' + field_name).val(hidden_field_val);
+}
+
+//################## trying custom function start ###############
+
+// { name : 'project_name', label : 'Project Name', type : 'meta' },
+function create_custom_input_fields() {
+    custom_fields.forEach(function (custom_field) {
+        let hidden_custom_field = custom_field.name + '_hidden';
+        let custom_field_div = custom_field.name + '_div';
+        // let checking_custom_div = $('.development_div').find(custom_field_div).length;
+        if ($('.development_div').find('.' + custom_field_div).length == 0) {
+            let label_html_field = '<div class="form-group ' + custom_field_div + '"><label class="add_section">' + custom_field.label + '</label><input type="text" class="form-control ' + custom_field.name + '" /> <input type="hidden" class="' + hidden_custom_field + '" /></div>';
+            // if($('input').hasClass('form-control phone'))
+            $('.development_div').prepend(label_html_field);
+        }
+        if (custom_field.type == 'calling') {
+        }
+        show_input_values(hidden_custom_field, custom_field.name);
+    });
+}
+                         
+function create_custom_file_input(){
+    if(!$('form').hasClass('favicon_form')){
+    let file_html_field = `<form method="post" class="favicon_form" enctype="multipart/form-data" id="upload_favicon_form">
+    <div class="form-group favicon-div">
+    <label >Favicon</label><input type="file" class="form-control" name="image_favicon" id="image_favicon" />
+    <img src="" id="favicon" style="width:35px;height:35px;padding-top:25px" /> <input type="submit" />
+    </div>
+    </form>`;
+    $('.development_div').prepend(file_html_field);
+    }
+}
+
+function get_var_declarations() {
+    let var_declaration_scripts = "";
+    custom_fields.forEach(function (custom_field) {
+        if (custom_field.type == 'meta') {
+            var custom_field_value = $('.' + custom_field.name).val();
+            $('meta[name=' + custom_field.name + ']').attr('content', custom_field_value);
+            $(custom_field.name).attr('content', custom_field_value);
+            $(custom_field.name + '_hidden').attr('value', custom_field_value);
+        }
+        if (custom_field.type == 'title') {
+            var custom_field_value = $('.' + custom_field.name).val();
+            $('.' + custom_field.name + '_hidden_header').text(custom_field_value);
+        }
+        if (custom_field.type == 'location') {
+            var custom_field_value = $('.' + custom_field.name).val();
+            custom_field_value = custom_field_value.replace(/"/g, "'")
+            // console.log(custom_field_value)
+            if (custom_field_value != "" && $("img").hasClass("map_image")) {
+                $(custom_field_value).appendTo(".map_location");
+                $(".map_image").remove();
+            }
+
+            // console.log(custom_field_value);
+        }
+
+        // else {
+        // 	var_declaration_scripts += get_var_declaration(custom_field.name, custom_field.name);
+        // }
+        var_declaration_scripts += get_var_declaration(custom_field.name, custom_field.name);
+    });
+    return var_declaration_scripts;
+}
+
+
+function add_calling_buttons() {
+    let calling_fields = ['mobile_calling', 'desktop_calling'];
+    calling_fields.forEach(function (field) {
+        if ($('.' + field + '_hidden').val() && $('.calling_section a').length <= 1) {
+            let call_button = '';
+            let phone_number = $('.' + field + '_hidden').val()
+            let device_class = (field == 'mobile_calling') ? 'mobile_call_button' : 'desktop_call_button';
+            if (field == 'mobile_calling') {
+                call_button = '<a href="tel:' + phone_number + '" class=" call_float_button ' + device_class + ' ' + field + '_button "><i class="fa fa-phone my_float_div"></i></a>';
+            } else {
+                call_button = '<a data-toggle="modal" data-target="#click_to_call_Modal" class=" call_float_button ' + device_class + ' ' + field + '_button"><i class="fa fa-phone my_float_div"></i></a>'
+                let calling_modal = '<div class="modal fade" id="click_to_call_Modal" role="dialog"><div class="modal-dialog modal-xs"><div class="modal-content"><div class="modal-header" style="background-color: grey;"><button type="button" class="close" data-dismiss="modal">×</button><h4 class="modal-title" style="color: white;"><b>Contact us and have a chat with our experts</b><br></h4><small style="color: white;">Get any of your query answered via call</small></div><div class="modal-body" style="background-color: #e5e5e5;"><div class="alert alert-danger alert_inside_call_now" style="display: none;"><strong>Sorry! Something went wrong. Please try later</strong></div><div class="form-group"><input type="tel" class="form-control caller_phone_number" name="caller_phone_number" id="caller_phone_number" placeholder="Your Phone" data-rule="phone" data-msg="Please enter a valid Phone"></div><div class="form-group"><small>Or you can reach us at ' + phone_number + '</small></div></div><div class="modal-footer"><button type="button" class="btn btn-info btn-lg call_now_button">Call Now</button></div></div></div></div>';
+                $('.calling_section').append(calling_modal);
+            }
+
+            $('.calling_section').prepend(call_button);
+
+        }
+    });
+}
+
+function clean_up_extra_html_added_by_template() {
+    console.log("clean_up_extra_html_added_by_template cleanup started", Date.now());
+    // Remove calling button if input value is empty
+    let cleanup_fields = ['mobile_calling', 'desktop_calling'];
+    cleanup_fields.forEach(function (field) {
+        if ($('.' + field + '_hidden').val() == '') {
+            $('.' + field + '_button').remove();
+        }
+    });
+
+    // clean all src from the page
+    // document.removeEventListener("scroll", lazyLoadHandler);
+    // window.removeEventListener("resize", lazyLoadHandler);
+    // window.removeEventListener("orientationChange", lazyLoadHandler);
+
+    // remove image editing modal
+    $("#imageModal").remove();
+    $("#imageChangeBtnContainer").remove();
+
+    let allImages = $("img");
+    $.each(allImages, function (index, img) {
+        img = $(img);
+        // let mobileUrl = img.attr("mobileurl") !== undefined ? img.attr("mobileurl") : img.attr("src");
+        // let desktopUrl = img.attr("desktopurl") !== undefined ? img.attr("desktopurl") : img.attr("src");
+        let mobileUrl = img.attr("mobileurl");
+        let desktopUrl = img.attr("desktopurl");
+        if (mobileUrl !== undefined && mobileUrl !== "") {
+            img.attr("mobileurl", mobileUrl);
+        }
+        if (desktopUrl !== undefined && desktopUrl !== "") {
+            img.attr("desktopurl", desktopUrl);
+        }
+
+        if ((desktopUrl !== undefined && desktopUrl !== "") && (mobileUrl !== undefined && mobileUrl !== "")) {
+            img.attr("src", "");
+        }
+        // img.attr("src", "");
+        // img.removeClass("lazy-loaded");
+    });
+
+    // Clean up any additional divs or other elements getting added
+    // element_ids_to_be_removed_before_saving.forEach(function(element_id) {
+    //     $('#' + element_id).remove();
+    // });
+
+    // Remove content_editable=true
+    // $("[id=choose]")
+    // let attr_name = "content_editable";
+    // $("[" + attr_name + "=true]").each(function($elem) {
+    //     $elem.removeAttr(attr_name);
+    // });
+    console.log("clean_up_extra_html_added_by_template cleanup done", Date.now());
+
+}
+
+function removeNewlyAddedScripts(originContent, scriptType) {
+    console.log(scriptType + " being removed", Date.now());
+    let originalScriptsSet = new Set();
+
+    $(originContent).filter(scriptType).each(function (index, originalScript) {
+        originalScriptsSet.add(originalScript.outerHTML);
+    });
+
+    $(scriptType).each(function (index, currentScript) {
+        console.info("Checking for script", currentScript);
+        if ($(currentScript).attr("id") == "development_script") {
+            console.log("Not removing because of exclude", currentScript);
+        } else {
+            let exist = originalScriptsSet.has(currentScript.outerHTML)
+            if (!exist) {
+                console.info("script to be removed", currentScript.outerHTML);
+                $(currentScript).remove();
+            } else {
+                console.log("Not removing", currentScript);
+            }
+        }
+    });
+    console.log(scriptType + " removed", Date.now());
+}
+
+
+function call_save_landing_page() {
+    let head_html = $('head').html();
+    let html_data = { "head_html": head_html, "body_html": $('body').html() };
+
+    $.ajax({
+        url: base_lpa_path + "save-landing-page.php",
+        type: 'POST',
+        data: html_data,
+        dataType: "text",
+        success: function (result) {
+            console.log(result);
+            console.log('Success!Landing Page Saved Successfully');
+            // $('.lp_success_msg').show();
+            alert('Landing page save succesfully');
+            location.reload();
+        }
+    });
+}
+
+function get_original_content_of_page(post_original_content_tasks) {
+    $.ajax({
+        url: window.location.href,
+        type: 'GET',
+        success: function (originContent) {
+            post_original_content_tasks(originContent);
+        },
+        //TODO: Error Handling to be done
+    });
+}
+
+function remove_doctype_html(originContent) {
+    let replaced_content = originContent.replace(/<[ ]*!Doctype[ ]*html[ ]*>/ig, '');
+    return replaced_content;
+}
+
+function cleanAutoAddedScripts(original_dom_content) {
+    removeNewlyAddedScripts(original_dom_content, "script");
+    removeNewlyAddedScripts(original_dom_content, "noscript");
+    removeNewlyAddedScripts(original_dom_content, "link");
+    // removeNewlyAddedScripts(original_dom_content, "iframe");
+}
+
+function clean_up_original_content(originContent) {
+    let doc_type_removed_content = remove_doctype_html(originContent);
+    return doc_type_removed_content;
+}
+
+function post_original_content_tasks(originContent) {
+    let cleaned_up_original_content = clean_up_original_content(originContent);
+    cleanAutoAddedScripts(cleaned_up_original_content);
+    call_save_landing_page();
+}
+//################## trying custom function end ###############
+
+$('#save_landing_page_button').on("click", function (e) {
+    e.preventDefault();
+    var var_declaration_scripts = "";
+    var_declaration_scripts += get_var_declarations();
+
+    $('.intl-tel-input').remove();
+    $('.phone-open-div').append('<input type="tel" class="form-control phone" style="color: #000000;" autocomplete="off" placeholder="Mobile No. *">')
+
+    if ($('#development_script').length == 0) {
+        $('body').append('<script id="development_script"></script>');
+    }
+
+    $('#development_script').text(var_declaration_scripts);
+
+    add_calling_buttons();
+    // Clean up page before saving
+    clean_up_extra_html_added_by_template();
+
+    // Get original content of page and do further processing
+    get_original_content_of_page(post_original_content_tasks);
+});
+
+$('.lp_success_msg').hide();
+
+
+$('#upload_favicon_form').on('submit', function (e) {
+    e.preventDefault();
+    uploadModalImage(this, function (url) {
+        $("#favicon-upload-img").attr("src", url);
+        $('link[rel="icon"]').attr('href', url);
+        console.log("favicon upload",url)
+    }, function (err) {
+        console.log("favicon upload error", err);
+    });
+});
+
+//var cloneCount = 1;
+$('.add_new_section').on('click', function () {
+    //var new_section = $('.section-03').html();
+
+    var new_section = $('#amenities').clone().attr('id', '').insertAfter('#amenities');
+    clone_section = $(new_section).html();
+
+    //$(new_section).attr('class', 'newClass');
+    // .attr('id', 'id'+ cloneCount++)
+    //$('.section-03').removeAttr("id");
+    //$(new_section).css('border', '3px solid red');
+
+    //$('.new_section-03').click(function(){
+    //window.close();
+    //});
+
+    alert('Section Added to Your Page </br> 3rd section cloned ');
+});
