@@ -940,14 +940,14 @@
         position: fixed;
         bottom: 0;
         left: 0;
-        padding: 10px 0 0px 15px;
+        /* padding: 15px 0 0px 15px; */
         width: 100%;
         background-color: #252f8b;
         z-index: 9999;
         padding: 0.5rem;
         margin: 0 auto;
         right: 0;
-        border-top: 1px solid rgb(255 255 255 / 30%);
+        /* border-top: 1px solid rgb(255 255 255 / 30%); */
       }
 
       .contact-section .col-form {
@@ -955,7 +955,7 @@
         width: 21%;
         float: left;
         padding: 0 15px 0 62px;
-        margin: 0 0 10px 6px !important;
+        /* margin: 0 0 10px 6px !important; */
       }
 
       .contact-section .col-form .sm-form-control {
@@ -967,8 +967,9 @@
 
       .theme-btn.white-btn {
         background: #fff;
-        color: #285339;
+        color: #252f8b;
         margin-top: 0.5rem;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       }
 
       .theme-btn {
@@ -1545,7 +1546,7 @@
         font-family: "Playfair Display", serif;
         margin-bottom: 15px;
       }
-      .location-li{
+      .location-li {
         font-size: 0.8rem;
         margin-bottom: 5px !important;
       }
@@ -1593,19 +1594,21 @@
       </div>
     </header>
 
-    <div id="mySidenav" class="sidenav" contenteditable="false">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        ><i class="fa fa-close"></i
-      ></a>
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <ul class="list-unstyled menu_list">
-        <li class="nav_item"><a href="#silder-header">HOME</a></li>
-        <!-- <li><a href="#heighlights">HIGHLIGHTS</a> </li> -->
-        <li class="nav_item"><a href="#amenities">AMENITIES</a></li>
-        <li class="nav_item"><a href="#gallery">GALLERY</a></li>
-        <li class="nav_item"><a href="#floor-plan">FLOOR PLAN</a></li>
-        <li class="nav_item"><a href="#location">LOCATION</a></li>
+          <li class="nav_item"><a href="#silder-header">HOME</a></li>
+          <li class="nav_item"><a href="#amenities">AMENITIES</a></li>
+          <li class="nav_item"><a href="#gallery">GALLERY</a></li>
+          <li class="nav_item"><a href="#floor-plan">FLOOR PLAN</a></li>
+          <li class="nav_item"><a href="#location">LOCATION</a></li>
+          <li class="nav_item"><a href="#faqs">FAQs</a></li>
       </ul>
-    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>  
     <!-- end side-navigation -->
     <nav class="navbar" style="border-bottom: 1px solid #19407d">
       <div class="container">
@@ -1682,8 +1685,12 @@
 
     <section class="benefits" style="background-color: #fff">
       <div class="container">
-        
-        <h4 style="text-align: center; margin-top: 3rem; margin-bottom: 3rem;" class="title-section">Project Overview</h4>
+        <h4
+          style="text-align: center; margin-top: 3rem; margin-bottom: 3rem"
+          class="title-section"
+        >
+          Project Overview
+        </h4>
         <div class="row">
           <div
             class="col wow fadeInUp animated animated"
@@ -1835,13 +1842,17 @@
             </div>
           </div>
         </div>
-        
-        <h4 style="text-align: center; margin-top: 2rem; margin-bottom: 2rem;" class="title-section">Project Highlights</h4>
+
+        <h4
+          style="text-align: center; margin-top: 2rem; margin-bottom: 2rem"
+          class="title-section"
+        >
+          Project Highlights
+        </h4>
         <div
           class="row align-items-center wow fadeInUp animated"
           style="visibility: visible"
         >
-        
           <div class="col-lg-6 about-img">
             <img
               src="./Sattva-Songbird_files/images/HIGHTLIGHTS.png"
@@ -1852,10 +1863,8 @@
             />
           </div>
           <!-- end col-6 -->
-           
+
           <div class="col-lg-6 wow fadeInUp" style="visibility: visible">
-            
-            
             <div class="content-box recent-gallery">
               <!-- <h4>Project Highlights</h4> -->
               <div class="unselectable">
@@ -2169,7 +2178,11 @@
             class="col-lg-12 wow fadeInUp text-center"
             style="visibility: hidden; animation-name: none"
           >
-            <h4 style="text-align: center; margin-top: 4rem; margin-bottom: 2rem;">Gallery</h4>
+            <h4
+              style="text-align: center; margin-top: 4rem; margin-bottom: 2rem"
+            >
+              Gallery
+            </h4>
           </div>
         </div>
         <div class="row mt-3">
@@ -2216,8 +2229,12 @@
     >
       <div class="overlay pb-3">
         <div class="container">
-          
-          <h4 style="text-align: center; margin-top: 3rem; margin-bottom: 2rem;" class="title-section">Floor Plan</h4>
+          <h4
+            style="text-align: center; margin-top: 3rem; margin-bottom: 2rem"
+            class="title-section"
+          >
+            Floor Plan
+          </h4>
           <div class="row align-items-center">
             <div class="manual-slider-container">
               <div class="manual-slider-wrapper">
@@ -2243,7 +2260,12 @@
 
             <div class="floor-plan">
               <div class="floorplan-title">
-                <h4 class="text-white mb-4" style="margin-top: 3rem; margin-bottom: 2rem;">Price &amp; Apartment Type</h4>
+                <h4
+                  class="text-white mb-4"
+                  style="margin-top: 3rem; margin-bottom: 2rem"
+                >
+                  Price &amp; Apartment Type
+                </h4>
                 <!-- <h5 class="price-plot">
                   <span style="font-size: 1.25rem"
                     >Sampoojitha Heights - Belathur Main Road, Kadugodi,
@@ -2269,7 +2291,7 @@
                       </tr>
                       <tr>
                         <td>2 BHK</td>
-                        <td>1457 sq.ft. - 1794 sq.ft. </td>
+                        <td>1145 sq.ft. - 1335 sq.ft.</td>
                         <td>
                           <a
                             id="bbt"
@@ -2285,7 +2307,7 @@
                       </tr>
                       <tr>
                         <td>3 BHK</td>
-                        <td>1158 sq.ft. - 1333 sq.ft. </td>
+                        <td>1470 sq.ft. - 1795 sq.ft.</td>
                         <td>
                           <a
                             id="bbt"
@@ -2335,8 +2357,12 @@
       style="background-position: 100% -19.5263px"
     >
       <div class="container">
-        
-        <h4 style="text-align: center; margin-top: 2rem; margin-bottom: 3rem;" class="title-section">Location</h4>
+        <h4
+          style="text-align: center; margin-top: 2rem; margin-bottom: 3rem"
+          class="title-section"
+        >
+          Location
+        </h4>
         <div class="row align-items-center">
           <div class="col-lg-6">
             <!-- <iframe
@@ -2362,22 +2388,34 @@
               <ul class="location-text in-list p-0">
                 <li class="location-li">Whitefield Railway Station – 1.8 km</li>
                 <li class="location-li">Kadugodi Metro Station – 2 km</li>
-                <li class="location-li">ITPL (International Tech Park Bangalore) – 5 km</li>
+                <li class="location-li">
+                  ITPL (International Tech Park Bangalore) – 5 km
+                </li>
                 <li class="location-li">Nexus Shantiniketan Mall – 7 km</li>
                 <li class="location-li">Park Square Mall – 5 km</li>
-                <li class="location-li">Manipal Hospital, Varthur Road – 6.5 km</li>
+                <li class="location-li">
+                  Manipal Hospital, Varthur Road – 6.5 km
+                </li>
                 <li class="location-li">Apollo Clinic, Mahadevapura – 11 km</li>
-                <li class="location-li">National Public School, Whitefield – 1 km</li>
+                <li class="location-li">
+                  National Public School, Whitefield – 1 km
+                </li>
                 <li class="location-li">PNC Cognitio School – 2 km</li>
-                <li class="location-li">ORCHIDS The International School – 2 km</li>
+                <li class="location-li">
+                  ORCHIDS The International School – 2 km
+                </li>
                 <li class="location-li">MVJ College of Engineering – 4 km</li>
-                <li class="location-li">Shri Kashi Vishveshwara Swami Temple – 4 km</li>
+                <li class="location-li">
+                  Shri Kashi Vishveshwara Swami Temple – 4 km
+                </li>
                 <li class="location-li">Reliance Digital, Belathur – 900 m</li>
                 <li class="location-li">
                   Proposed Peripheral Ring Road (PRR) & Upcoming Metro Station –
                   within 2 km
                 </li>
-                <li class="location-li">Kempegowda International Airport – 34 km</li>
+                <li class="location-li">
+                  Kempegowda International Airport – 34 km
+                </li>
               </ul>
               <!-- <a
                 href="https://sattvasongbird.in/#"
@@ -2580,7 +2618,12 @@
             class="col-lg-12 col-md-12 wow fadeInUp"
             style="visibility: hidden; animation-name: none"
           >
-            <h4 class="text-center" style="margin-top: 3rem; margin-bottom: 1rem;">FAQs</h4>
+            <h4
+              class="text-center"
+              style="margin-top: 3rem; margin-bottom: 1rem"
+            >
+              FAQs
+            </h4>
           </div>
         </div>
         <div class="row">
@@ -3028,9 +3071,9 @@
                   <input
                     type="text"
                     class="sm-form-control fname name"
-                    name="fname"
+                    name="name"
                     id="inquiry1-fname"
-                    placeholder="First Name*"
+                    placeholder="Name*"
                     min-length="1"
                     max-length="100"
                     required=""
@@ -3051,9 +3094,9 @@
                   <input
                     type="text"
                     class="sm-form-control lname name"
-                    name="lname"
+                    name="number"
                     id="inquiry1-lname"
-                    placeholder="Last Name*"
+                    placeholder="Mobile Number*"
                     min-length="1"
                     max-length="100"
                     required=""
@@ -3169,7 +3212,7 @@
           </a>
         </div>
       </div>
-      <button
+      <!-- <button
         type="button request-button"
         class="chat"
         data-toggle="modal"
@@ -3197,7 +3240,7 @@
           alt="download"
           class="img-fluid"
           style="filter: invert(1)"
-      /></a>
+      /></a> -->
 
       <div
         class="modal fade hide2"
@@ -3308,9 +3351,9 @@
                                 <input
                                   type="text"
                                   class="f_control name"
-                                  name="lname"
+                                  name="number"
                                   id="lname"
-                                  placeholder="Last Name*"
+                                  placeholder="Mobiel Number*"
                                   required=""
                                 />
                               </div>
@@ -7412,6 +7455,10 @@
           }
         });
       </script>
+
+
+
+
       <style>
         /* Modal scroll fix for mobile */
         @media (max-width: 768px) {
@@ -7472,6 +7519,98 @@
           manualUpdateSlider();
         }
       </script>
+
+
+
+<script>
+  // Open Navigation
+  function openNav() {
+      const sidenav = document.getElementById("mySidenav");
+      const overlay = document.getElementById("navOverlay");
+      
+      sidenav.classList.add('active');
+      overlay.classList.add('active');
+      
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden';
+  }
+
+  // Close Navigation
+  function closeNav() {
+      const sidenav = document.getElementById("mySidenav");
+      const overlay = document.getElementById("navOverlay");
+      
+      sidenav.classList.remove('active');
+      overlay.classList.remove('active');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+  }
+
+  // Close menu when clicking on nav items
+  document.querySelectorAll('.nav_item a').forEach(item => {
+      item.addEventListener('click', function(e) {
+          // Allow smooth scroll
+          const href = this.getAttribute('href');
+          
+          if (href.startsWith('#')) {
+              e.preventDefault();
+              const targetId = href.substring(1);
+              const targetElement = document.getElementById(targetId);
+              
+              if (targetElement) {
+                  closeNav();
+                  
+                  // Smooth scroll after menu closes
+                  setTimeout(() => {
+                      targetElement.scrollIntoView({
+                          behavior: 'smooth',
+                          block: 'start'
+                      });
+                  }, 300);
+              }
+          } else {
+              closeNav();
+          }
+      });
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+          closeNav();
+      }
+  });
+
+  // Handle window resize
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+          if (window.innerWidth > 991) {
+              closeNav();
+          }
+      }, 250);
+  });
+</script>
     </div>
+
+
+
+    
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "100%";
+        document.getElementById("header").style.marginLeft = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("header").style.marginLeft= "0";  
+      }
+    </script>
   </body>
 </html>
+
+
+

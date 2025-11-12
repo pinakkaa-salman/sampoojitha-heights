@@ -3377,3 +3377,870 @@ footer ul li:nth-child(2) {
 .call-to-action1 p:hover{background:#cdaf87;}
 .call-to-action1 .col-6{float:right;}
 /*# sourceMappingURL=style.css.map */
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================
+   MOBILE RESPONSIVE MEDIA QUERIES
+   ======================================== */
+
+/* Large Desktop */
+@media (max-width: 1366px) {
+  .navbar .container .menu ul li {
+    margin-left: 30px;
+  }
+  
+  .slider .slider-container .swiper-slide .container {
+    padding-left: 80px;
+  }
+}
+
+/* Desktop/Tablet Landscape */
+@media (max-width: 1199px) {
+  .container {
+    max-width: 960px;
+  }
+  
+  .navbar .container .upper-side .phone-email {
+    display: none;
+  }
+  
+  .intro figure .holder {
+    transform: translate(50px, -50px);
+  }
+  
+  .intro figure .holder img {
+    width: 450px;
+  }
+  
+  .property-calculator figure .holder {
+    transform: translate(50px, -50px);
+  }
+  
+  .property-calculator figure .holder img {
+    width: 450px;
+  }
+  
+  .slider .slider-container .swiper-slide .container {
+    padding-left: 60px;
+  }
+  
+  .slider .slider-container .swiper-slide .container h1 {
+    font-size: 6vw;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 991px) {
+  .container {
+    max-width: 820px;
+  }
+  
+  /* Navigation */
+  .navbar .container .menu {
+    display: none;
+  }
+  
+  .navbar .container .upper-side .hamburger {
+    margin-left: auto;
+    display: block;
+  }
+  
+  .hamburger span {
+    display: block;
+  }
+  
+  .side-navigation .menu {
+    display: block;
+  }
+  
+  /* Slider */
+  .slider .slider-container .swiper-slide .container {
+    padding-left: 40px;
+  }
+  
+  .slider .slider-container .swiper-slide .container h1 {
+    font-size: 7vw;
+  }
+  
+  .slider .slider-container .inner-elements .container .social-media {
+    display: none;
+  }
+  
+  /* Sections */
+  .intro {
+    padding: 40px 0;
+  }
+  
+  .intro figure {
+    width: 100%;
+    margin-bottom: 60px;
+  }
+  
+  .intro figure .pattern-bg {
+    width: 100%;
+    left: 0;
+  }
+  
+  .intro figure .holder {
+    transform: translate(0, -30px);
+    padding: 0 10%;
+  }
+  
+  .intro figure .holder img {
+    width: 100%;
+  }
+  
+  .intro .content-box {
+    padding-left: 0;
+  }
+  
+  .benefits .col {
+    border-right: none;
+    margin-bottom: 30px;
+  }
+  
+  .property-calculator {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .property-calculator .col-lg-6:nth-child(1) {
+    order: 2;
+  }
+  
+  .property-calculator .col-lg-6:nth-child(2) {
+    order: 1;
+  }
+  
+  .property-calculator figure {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  
+  .property-calculator figure:before {
+    display: none;
+  }
+  
+  .property-calculator figure .holder {
+    transform: translate(0, -30px);
+    padding: 0 10%;
+  }
+  
+  .property-calculator figure .holder img {
+    width: 100%;
+  }
+  
+  .property-calculator .content-box {
+    padding-left: 0;
+    margin-top: 20px;
+  }
+  
+  .recent-gallery {
+    padding: 40px 0;
+  }
+  
+  .recent-gallery h3 {
+    padding-right: 0;
+  }
+  
+  .recent-gallery .col-md-4 {
+    margin-top: 0 !important;
+  }
+  
+  .property-plans {
+    padding: 40px 20px;
+  }
+  
+  .get-consultation {
+    padding: 40px 0;
+  }
+  
+  .certificates {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .page-header .container h1 {
+    font-size: 8vw;
+  }
+  
+  .modal-header img {
+    padding-left: 12rem !important;
+    width: 60%;
+  }
+  
+  .youtube-video iframe {
+    width: 100%;
+    height: 400px;
+  }
+
+
+
+
+  
+  .navbar{
+    height: 130px;
+  }
+  .carousel-item{
+    margin-top: 3rem;
+  }
+  p{
+    font-size: 1.5rem;
+  }
+  .company-info h1{
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+  .p-0{
+    font-size: 1.5rem;
+  }
+  .intro .content-box a{
+    width: 35%;
+    font-size: 1.5rem;
+  }
+  .manual-slider-wrapper{
+    width: 100%;
+    object-fit: cover;
+  }
+  .modal-content{
+    /* width: 120%; */
+    /* height: 40vh; */
+  }
+  .modal-dialog{
+    max-width: 650px;
+    max-height: 950px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+/* Mobile Landscape */
+@media (max-width: 767px) {
+  .container {
+    max-width: 540px;
+  }
+  
+  /* Navigation */
+  .navbar {
+    padding: 10px 0;
+  }
+  
+  .navbar .container .upper-side .logo img {
+    height: 40px;
+  }
+  
+  .side-navigation {
+    width: 80vw;
+  }
+  
+  /* Slider */
+  .slider {
+    min-height: 500px;
+  }
+  
+  .slider .slider-container .swiper-slide .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .slider .slider-container .swiper-slide .container h1 {
+    font-size: 8vw;
+    margin-bottom: 15px;
+  }
+  
+  .slider .slider-container .swiper-slide .container h2 {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .slider .slider-container .swiper-slide .container a {
+    height: 50px;
+    line-height: 46px;
+    font-size: 12px;
+    padding: 0 30px;
+  }
+  
+  .slider .slider-container .swiper-slide .container figure {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  
+  /* Page Header */
+  .page-header {
+    height: 400px;
+    padding-top: 150px;
+  }
+  
+  .page-header .container h1 {
+    font-size: 10vw;
+  }
+  
+  .page-header .container .breadcrumb {
+    width: calc(100% - 30px);
+    padding: 30px 20px;
+  }
+  
+  /* Benefits */
+  .benefits .col {
+    width: 50%;
+    flex-basis: auto;
+    border-right: none;
+    padding: 20px 10px;
+  }
+  
+  .benefits figure img {
+    height: 50px;
+  }
+  
+  .benefits h6 {
+    font-size: 13px;
+  }
+  
+  .benefits .odometer {
+    font-size: 40px;
+  }
+  
+  /* Sections */
+  .intro {
+    padding: 30px 0;
+  }
+  
+  .intro .content-box h4 {
+    font-size: 30px;
+  }
+  
+  .intro .content-box p {
+    font-size: 14px;
+    text-align: justify;
+  }
+  
+  .property-calculator {
+    padding: 30px 0;
+  }
+  
+  .property-calculator .content-box h4 {
+    font-size: 30px;
+  }
+  
+  .property-calculator .content-box ul li {
+    font-size: 14px;
+    line-height: 30px;
+  }
+  
+  .recent-gallery {
+    padding: 30px 0;
+  }
+  
+  .recent-gallery h4 {
+    font-size: 30px;
+    text-align: center;
+  }
+  
+  .recent-gallery figure {
+    margin: 10px 0;
+  }
+  
+  .property-plans {
+    padding: 30px 15px;
+  }
+  
+  .property-plans h4 {
+    font-size: 30px;
+    text-align: center;
+  }
+  
+  .property-plans table {
+    font-size: 13px;
+  }
+  
+  .get-consultation h4 {
+    font-size: 30px;
+  }
+  
+  .get-consultation .content-box {
+    padding: 20px;
+  }
+  
+  .property-customization {
+    padding: 30px 0;
+  }
+  
+  .property-customization h4 {
+    font-size: 30px;
+  }
+  
+  .certificates {
+    padding: 30px 0;
+  }
+  
+  .certificates h4 {
+    font-size: 30px;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 30px 0 80px 0;
+    margin-bottom: 0 !important;
+  }
+  
+  footer ul {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  footer ul li {
+    padding: 10px 0;
+    border: none !important;
+  }
+  
+  footer ul li:nth-child(2) {
+    border-top: 1px solid rgba(255,255,255,0.3) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+    margin: 10px 0;
+  }
+  
+  /* Mobile Bottom Bar */
+  .call-to-action1 {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+  
+  .mob-ph {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1d417f;
+    padding: 12px 15px;
+    z-index: 9999;
+    text-align: center;
+  }
+  
+  .mob-ph a {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  /* Modals */
+  .modal-header img {
+    padding-left: 0 !important;
+    width: 70%;
+    height: auto;
+  }
+  
+  .modal-dialog {
+    max-width: 90%;
+    margin: 20px auto;
+  }
+  
+  /* Forms */
+  button[type="submit"] {
+    margin-left: 0 !important;
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"] {
+    height: 48px;
+    font-size: 14px;
+  }
+  
+  /* Sliders */
+  .slick-slider img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  
+  .youtube-video iframe {
+    width: 100%;
+    height: 250px;
+  }
+  
+  /* Amenities */
+  .amenities-container {
+    gap: 20px;
+  }
+  
+  .amenity-card {
+    width: 100px;
+  }
+  
+  .icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .amenity-name {
+    font-size: 12px;
+  }
+  
+  /* Floor Plan Slider */
+  .manual-slider-slide {
+    height: 300px;
+  }
+  
+  .manual-slider-wrapper {
+    width: 100%;
+  }
+  
+  /* WhatsApp */
+  .whatsapp_float {
+    width: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 70px;
+  }
+  
+  .chat {
+    display: none;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 575px) {
+  .container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Slider */
+  .slider .slider-container .swiper-slide .container h1 {
+    font-size: 9vw;
+  }
+  
+  .slider .slider-container .swiper-slide .container h2 {
+    font-size: 16px;
+  }
+  
+  .slider .slider-container .swiper-slide .container a {
+    height: 45px;
+    line-height: 41px;
+    font-size: 11px;
+    padding: 0 25px;
+  }
+  
+  /* Typography */
+  h4, .section-title {
+    font-size: 28px !important;
+  }
+  
+  .title-section {
+    font-size: 32px !important;
+  }
+  
+  /* Benefits */
+  .benefits .col {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .benefits .col:last-child {
+    border-bottom: none;
+  }
+  
+  .benefits figure img {
+    height: 45px;
+  }
+  
+  .benefits .extra {
+    font-size: 14px;
+  }
+  
+  /* Sections */
+  .intro .content-box h4 {
+    font-size: 26px;
+  }
+  
+  .property-calculator .content-box h4 {
+    font-size: 26px;
+  }
+  
+  .property-calculator .content-box ul li {
+    font-size: 13px;
+  }
+  
+  .recent-gallery h4 {
+    font-size: 26px;
+  }
+  
+  .property-plans h4 {
+    font-size: 26px;
+  }
+  
+  .property-plans table {
+    font-size: 12px;
+  }
+  
+  .property-plans table tr td:first-child {
+    width: 120px;
+  }
+  
+  .get-consultation h4 {
+    font-size: 26px;
+  }
+  
+  .property-customization h4 {
+    font-size: 26px;
+  }
+  
+  .property-customization figure {
+    padding: 10px;
+  }
+  
+  .property-customization figure img {
+    height: 30px;
+  }
+  
+  .property-customization figure figcaption {
+    font-size: 12px;
+  }
+  
+  .certificates h4 {
+    font-size: 26px;
+  }
+  
+  /* Floor Plan */
+  .manual-slider-slide {
+    height: 250px;
+  }
+  
+  .manual-slider-nav {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  /* Amenities */
+  .amenities-section {
+    padding: 30px 15px;
+  }
+  
+  .amenity-card {
+    width: 90px;
+  }
+  
+  .icon-wrapper {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .amenity-name {
+    font-size: 11px;
+  }
+  
+  /* FAQ */
+  .accordion .card {
+    margin-bottom: 15px;
+  }
+  
+  .faq-toggle {
+    font-size: 1.1rem;
+  }
+  
+  /* Location */
+  .location-text li {
+    font-size: 13px;
+  }
+  
+  /* WhatsApp */
+  .whatsapp_float {
+    width: 40px;
+  }
+  
+  .youtube-video iframe {
+    height: 200px;
+  }
+
+
+
+
+
+
+  .navbar{
+    height: 130px;
+  }
+  .carousel-item{
+    margin-top: 3rem;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+/* Extra Small Mobile */
+@media (max-width: 375px) {
+  .slider .slider-container .swiper-slide .container h1 {
+    font-size: 28px;
+  }
+  
+  .slider .slider-container .swiper-slide .container h2 {
+    font-size: 14px;
+  }
+  
+  .slider .slider-container .swiper-slide .container a {
+    height: 40px;
+    line-height: 36px;
+    font-size: 10px;
+    padding: 0 20px;
+  }
+  
+  h4, .section-title {
+    font-size: 24px !important;
+  }
+  
+  .title-section {
+    font-size: 28px !important;
+  }
+  
+  .benefits figure img {
+    height: 40px;
+  }
+  
+  .benefits .odometer {
+    font-size: 35px;
+  }
+  
+  .manual-slider-slide {
+    height: 220px;
+  }
+  
+  .amenity-card {
+    width: 80px;
+  }
+  
+  .icon-wrapper {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .amenity-name {
+    font-size: 10px;
+  }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+/* Landscape Orientation Fix */
+@media (max-height: 500px) and (orientation: landscape) {
+  .slider {
+    min-height: 100vh;
+  }
+  
+  .slider .slider-container .swiper-slide .container {
+    padding-top: 80px;
+  }
+  
+  .navbar {
+    padding: 5px 0;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .side-navigation,
+  .mob-ph,
+  .call-to-action1,
+  .whatsapp_float,
+  .chat,
+  footer {
+    display: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+
